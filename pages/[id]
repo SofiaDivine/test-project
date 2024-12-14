@@ -1,0 +1,36 @@
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
+import { Product } from '../types/productTypes';
+
+export default function ProductPage() {
+  const router = useRouter();
+  const { id } = router.query;
+  const [product, setProduct] = useState<Product | null>(null);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    async function fetchProduct() {
+      if (!id) return;
+      try {
+        const res = await fetch(`http://localhost:3000/api/products/${id}`, {
+          cache: 'no-store',
+        });
+
+        if (!res.ok) {
+          throw new Error('Failed to fetch product');
+        }
+
+        const data = await res.json();
+        setProduct(data);
+      } catch (err) {
+        if (err instanceof Error) {
+          setError(err.message);
+        } else {
+          setError('Unknown error occurred');
+        }
+      }
+    }
+
+    fetchProduct();
+  }, [id]);
+}
