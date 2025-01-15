@@ -1,4 +1,5 @@
 import { Card, CardMedia, CardContent, Typography, Box } from "@mui/material";
+import { useRouter } from "next/navigation";
 
 interface ProductCardProps {
   product: {
@@ -14,14 +15,22 @@ interface ProductCardProps {
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
+  const router = useRouter();
+
+  const handleCardClick = () => {
+    router.push(`/products/${product.id}`);
+  };
+
   return (
     <Card
       sx={{
         maxWidth: 300,
         margin: 2,
         transition: "transform 0.3s ease-in-out",
+        cursor: "pointer",
         "&:hover": { transform: "scale(1.05)" },
       }}
+      onClick={handleCardClick}
     >
       <CardMedia
         component="img"

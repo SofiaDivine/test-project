@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import products from '../../products.json';
+import products from '../../../products.json';
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   const { page = 1, limit = 10 } = req.query;
@@ -18,4 +18,3 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     currentPage: pageNumber,
   });
 }
-
