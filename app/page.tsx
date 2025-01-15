@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import { useEffect, useState } from 'react';
-import { ProductsData } from '../types/productTypes';
-import CustomPagination from './components/Pagination';
-import ProductCard from './components/ProductCard';
+import { useEffect, useState } from "react";
+import { ProductsData } from "../types/productTypes";
+import CustomPagination from "../components/Pagination";
+import ProductCard from "../components/ProductCard";
 
 export default function HomePage() {
   const [productsData, setProductsData] = useState<ProductsData | null>(null);
@@ -14,12 +14,15 @@ export default function HomePage() {
   useEffect(() => {
     async function fetchProducts() {
       try {
-        const res = await fetch(`http://localhost:3000/api/products?page=${currentPage}&limit=10`, {
-          cache: 'no-store',
-        });
+        const res = await fetch(
+          `http://localhost:3000/api/products?page=${currentPage}&limit=10`,
+          {
+            cache: "no-store",
+          }
+        );
 
         if (!res.ok) {
-          throw new Error('Failed to fetch products');
+          throw new Error("Failed to fetch products");
         }
 
         const data = await res.json();
@@ -29,7 +32,7 @@ export default function HomePage() {
         if (err instanceof Error) {
           setError(err.message);
         } else {
-          setError('Unknown error occurred');
+          setError("Unknown error occurred");
         }
       }
     }
@@ -48,7 +51,16 @@ export default function HomePage() {
   return (
     <main className="p-4">
       <h1 className="text-2xl font-bold mb-4">Products</h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
+          gap: "16px",
+          maxWidth: "1200px",
+          margin: "0 auto",
+          padding: "16px",
+        }}
+      >
         {productsData.products.map((product) => (
           <ProductCard key={product.id} product={product} />
         ))}
@@ -62,4 +74,3 @@ export default function HomePage() {
     </main>
   );
 }
-

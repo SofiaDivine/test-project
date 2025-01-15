@@ -1,4 +1,4 @@
-import { Card, CardMedia, CardContent, Typography, Box } from '@mui/material';
+import { Card, CardMedia, CardContent, Typography, Box } from "@mui/material";
 
 interface ProductCardProps {
   product: {
@@ -19,8 +19,8 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
       sx={{
         maxWidth: 300,
         margin: 2,
-        transition: 'transform 0.3s ease-in-out',
-        '&:hover': { transform: 'scale(1.05)' },
+        transition: "transform 0.3s ease-in-out",
+        "&:hover": { transform: "scale(1.05)" },
       }}
     >
       <CardMedia
@@ -39,9 +39,9 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         </Typography>
         <Box
           sx={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
             marginTop: 1,
           }}
         >
@@ -50,7 +50,9 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
             -{product.discountPercentage}%
           </Typography>
         </Box>
-        <Typography variant="body2">Rating: {product.rating.toFixed(1)}</Typography>
+        <Typography variant="body2">
+          Rating: {product.rating.toFixed(1)}
+        </Typography>
       </CardContent>
     </Card>
   );
