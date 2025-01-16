@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import { ProductsData } from "../types/productTypes";
 import CustomPagination from "../components/Pagination";
 import ProductCard from "../components/ProductCard";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 
 export default function HomePage() {
   const [productsData, setProductsData] = useState<ProductsData | null>(null);
@@ -49,28 +51,32 @@ export default function HomePage() {
   }
 
   return (
-    <main className="p-4">
-      <h1 className="text-2xl font-bold mb-4">Products</h1>
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
-          gap: "16px",
-          maxWidth: "1200px",
-          margin: "0 auto",
-          padding: "16px",
-        }}
-      >
-        {productsData.products.map((product) => (
-          <ProductCard key={product.id} product={product} />
-        ))}
-      </div>
+    <>
+      <Header />
+      <main className="p-4">
+        <h1 className="text-2xl font-bold mb-4">Products</h1>
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
+            gap: "16px",
+            maxWidth: "1200px",
+            margin: "0 auto",
+            padding: "16px",
+          }}
+        >
+          {productsData.products.map((product) => (
+            <ProductCard key={product.id} product={product} />
+          ))}
+        </div>
 
-      <CustomPagination
-        currentPage={currentPage}
-        totalPages={totalPages}
-        onPageChange={(page) => setCurrentPage(page)}
-      />
-    </main>
+        <CustomPagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={(page) => setCurrentPage(page)}
+        />
+      </main>
+      <Footer />
+    </>
   );
 }
