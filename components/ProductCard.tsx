@@ -1,4 +1,12 @@
-import { Card, CardMedia, CardContent, Typography, Box } from "@mui/material";
+import React from "react";
+import {
+  Card,
+  CardMedia,
+  CardContent,
+  Typography,
+  Box,
+  Chip,
+} from "@mui/material";
 import { useRouter } from "next/navigation";
 
 interface ProductCardProps {
@@ -24,43 +32,94 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   return (
     <Card
       sx={{
-        maxWidth: 300,
-        margin: 2,
+        maxWidth: 360,
+        margin: "auto",
         transition: "transform 0.3s ease-in-out",
         cursor: "pointer",
-        "&:hover": { transform: "scale(1.05)" },
+        "&:hover": { transform: "scale(1.08)" },
+        backgroundColor: "#ffffff",
+        boxShadow: "0 6px 15px rgba(0, 0, 0, 0.1)",
+        borderRadius: "15px",
+        overflow: "hidden",
+        position: "relative",
       }}
       onClick={handleCardClick}
     >
+      {/* Discount Badge */}
+      {product.discountPercentage > 0 && (
+        <Chip
+          label={`-${product.discountPercentage}%`}
+          color="error"
+          sx={{
+            position: "absolute",
+            top: "10px",
+            right: "10px",
+            fontWeight: "bold",
+            borderRadius: "5px",
+            background: "rgba(255, 0, 0, 0.8)",
+            color: "#fff",
+          }}
+        />
+      )}
+
       <CardMedia
         component="img"
-        height="140"
-        image={product.thumbnail}
+        height="240"
+        image={product.thumbnail || "/default-image.jpg"}
         alt={product.title}
+        sx={{ objectFit: "cover" }}
       />
-      <CardContent>
-        <Typography variant="h6">{product.title}</Typography>
-        <Typography variant="body2" color="text.secondary">
-          Category: {product.category}
+
+      <CardContent
+        sx={{
+          textAlign: "center",
+          backgroundColor: "#f9fafc",
+          padding: "16px",
+        }}
+      >
+        <Typography
+          variant="h6"
+          component="h2"
+          sx={{ color: "#343a40", fontWeight: "bold" }}
+        >
+          {product.title}
         </Typography>
-        <Typography variant="body2" color="text.secondary">
-          Brand: {product.brand}
+        <Typography variant="body2" color="text.secondary" sx={{ mt: 1 }}>
+          {product.category} | {product.brand}
         </Typography>
+
         <Box
           sx={{
             display: "flex",
-            justifyContent: "space-between",
+            justifyContent: "center",
             alignItems: "center",
-            marginTop: 1,
+            mt: 2,
+            gap: 1,
           }}
         >
-          <Typography variant="body1">${product.price.toFixed(2)}</Typography>
-          <Typography variant="body2" color="success.main">
-            -{product.discountPercentage}%
+          <Typography
+            variant="h6"
+            sx={{
+              color: "#d32f2f",
+              fontWeight: "bold",
+              textDecoration: "line-through",
+            }}
+          >
+            $
+            {(product.price * (1 + product.discountPercentage / 100)).toFixed(
+              2
+            )}
+          </Typography>
+          <Typography
+            variant="h5"
+            sx={{ color: "#2e7d32", fontWeight: "bold" }}
+          >
+            ${product.price.toFixed(2)}
           </Typography>
         </Box>
-        <Typography variant="body2">
-          Rating: {product.rating.toFixed(1)}
+
+        <Typography variant="body2" sx={{ mt: 1 }}>
+          ⭐ Rating: {product.rating.toFixed(1)}
         </Typography>
       </CardContent>
     </Card>

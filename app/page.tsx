@@ -6,6 +6,8 @@ import CustomPagination from "../components/Pagination";
 import ProductCard from "../components/ProductCard";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import Layout from "@/layout";
+import { Box, Typography, Grid } from "@mui/material";
 
 export default function HomePage() {
   const [productsData, setProductsData] = useState<ProductsData | null>(null);
@@ -51,32 +53,29 @@ export default function HomePage() {
   }
 
   return (
-    <>
-      <Header />
-      <main className="p-4">
-        <h1 className="text-2xl font-bold mb-4">Products</h1>
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
-            gap: "16px",
-            maxWidth: "1200px",
-            margin: "0 auto",
-            padding: "16px",
-          }}
-        >
-          {productsData.products.map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))}
-        </div>
-
+    <Layout>
+      <Typography
+        variant="h4"
+        component="h1"
+        gutterBottom
+        sx={{ textAlign: "center", color: "#343a40" }}
+      >
+        Products
+      </Typography>
+      <Grid container spacing={4} sx={{ justifyContent: "center" }}>
+        {productsData.products.map((product) => (
+          <Grid item xs={12} sm={6} md={4} key={product.id}>
+            <ProductCard product={product} />
+          </Grid>
+        ))}
+      </Grid>
+      <Box sx={{ mt: 4, display: "flex", justifyContent: "center" }}>
         <CustomPagination
           currentPage={currentPage}
           totalPages={totalPages}
           onPageChange={(page) => setCurrentPage(page)}
         />
-      </main>
-      <Footer />
-    </>
+      </Box>
+    </Layout>
   );
 }

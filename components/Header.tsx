@@ -43,18 +43,12 @@ const Header: React.FC = () => {
               Home
             </Button>
           </Link>
-          <Link href="/about" passHref>
-            <Button
-              sx={{ color: "#343a40", fontWeight: "bold", marginRight: "10px" }}
-            >
-              Conditions
-            </Button>
-          </Link>
-          <Link href="/contact" passHref>
-            <Button sx={{ color: "#343a40", fontWeight: "bold" }}>
-              Contact
-            </Button>
-          </Link>
+          <Button
+            href="#contact"
+            sx={{ color: "#343a40", fontWeight: "bold", marginRight: "10px" }}
+          >
+            Contact
+          </Button>
         </Box>
       </Toolbar>
     </AppBar>
