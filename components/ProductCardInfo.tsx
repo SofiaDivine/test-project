@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Box,
   Typography,
@@ -10,10 +10,14 @@ import {
   Divider,
   Rating,
   Button,
+  IconButton,
+  DialogContent,
+  Dialog,
 } from "@mui/material";
 import Header from "./Header";
 import Footer from "./Footer";
 import Link from "next/link";
+import CloseIcon from "@mui/icons-material/Close";
 
 interface ProductCardInfoProps {
   product: {
@@ -58,14 +62,27 @@ interface ProductCardInfoProps {
 }
 
 const ProductCardInfo: React.FC<ProductCardInfoProps> = ({ product }) => {
-  if (!product) {
-    return <div>Product not found</div>;
-  }
+  const [open, setOpen] = useState(false);
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+
+  const handleOpen = (image: string) => {
+    setSelectedImage(image);
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setSelectedImage(null);
+    setOpen(false);
+  };
 
   const showWeight = ["groceries", "furniture"].includes(product.category);
   const showReturnPolicy = ["furniture", "fragrances", "beauty"].includes(
     product.category
   );
+
+  if (!product) {
+    return <div>Product not found</div>;
+  }
 
   return (
     <>
@@ -207,9 +224,11 @@ const ProductCardInfo: React.FC<ProductCardInfoProps> = ({ product }) => {
             {product.images.map((image, index) => (
               <Grid item xs={12} sm={6} md={4} key={index}>
                 <Card
+                  onClick={() => handleOpen(image)}
                   sx={{
                     borderRadius: "15px",
                     boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+                    cursor: "pointer",
                     transition: "transform 0.3s ease",
                     "&:hover": {
                       transform: "scale(1.05)", // Zoom effect on hover
@@ -231,6 +250,48 @@ const ProductCardInfo: React.FC<ProductCardInfoProps> = ({ product }) => {
             ))}
           </Grid>
         </Box>
+
+        {/* Modal for Enlarged Photo */}
+        <Dialog open={open} onClose={handleClose} maxWidth="lg">
+          <DialogContent
+            sx={{
+              position: "relative",
+              backgroundColor: "#fef6e4",
+              maxWidth: "90%",
+              maxHeight: "90vh",
+              overflow: "auto",
+              margin: "0 auto",
+            }}
+          >
+            <IconButton
+              onClick={handleClose}
+              sx={{
+                position: "absolute",
+                top: 10,
+                right: 10,
+                backgroundColor: "#ff69b4",
+                color: "#fff",
+                "&:hover": {
+                  backgroundColor: "#ff8c94",
+                },
+              }}
+            >
+              <CloseIcon />
+            </IconButton>
+            {selectedImage && (
+              <img
+                src={selectedImage}
+                alt="Selected Product"
+                style={{
+                  width: "100%",
+                  maxHeight: "90vh",
+                  objectFit: "contain",
+                  borderRadius: "15px",
+                }}
+              />
+            )}
+          </DialogContent>
+        </Dialog>
 
         {/* Additional Details */}
         <Box sx={{ mt: 4 }}>
