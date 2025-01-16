@@ -1,26 +1,45 @@
 import React from "react";
 import { AppBar, Toolbar, Typography, Box, Button } from "@mui/material";
 import Link from "next/link";
+import { styled } from "@mui/system";
+
+const LogoLink = styled("a")({
+  textDecoration: "none",
+  display: "flex",
+  alignItems: "center",
+});
+
+const StyledButton = styled(Button)({
+  color: "#9c27b0",
+  fontWeight: "bold",
+  marginRight: "10px",
+  backgroundColor: "#fef6e4",
+  border: "2px solid #ff8c94",
+  borderRadius: "20px",
+  padding: "8px 16px",
+  transition: "all 0.3s ease",
+  "&:hover": {
+    backgroundColor: "#ff8c94",
+    color: "#fef6e4",
+    borderColor: "#ff8c94",
+  },
+});
 
 const Header: React.FC = () => {
   return (
     <AppBar
       position="static"
-      sx={{ backgroundColor: "#f8f9fa", color: "#343a40" }}
+      sx={{
+        backgroundColor: "#fef6e4",
+        color: "#343a40",
+        boxShadow: "none",
+        borderBottom: "2px solid #ff8c94",
+      }}
     >
       <Toolbar>
         <Box sx={{ flexGrow: 1, display: "flex", alignItems: "center" }}>
           <Link href="/" passHref>
-            <Typography
-              variant="h6"
-              component="a"
-              sx={{
-                textDecoration: "none",
-                color: "inherit",
-                display: "flex",
-                alignItems: "center",
-              }}
-            >
+            <LogoLink>
               <img
                 src="/logo.png"
                 alt="Logo"
@@ -29,26 +48,26 @@ const Header: React.FC = () => {
                   marginRight: "10px",
                 }}
               />
-              <span style={{ fontWeight: "bold", fontSize: "1.5rem" }}>
+              <Typography
+                variant="h6"
+                sx={{
+                  fontWeight: "bold",
+                  fontSize: "1.5rem",
+                  color: "#ff8c94",
+                }}
+              >
                 HAPPY STORE
-              </span>
-            </Typography>
+              </Typography>
+            </LogoLink>
           </Link>
         </Box>
         <Box>
           <Link href="/" passHref>
-            <Button
-              sx={{ color: "#343a40", fontWeight: "bold", marginRight: "10px" }}
-            >
-              Home
-            </Button>
+            <StyledButton>Home</StyledButton>
           </Link>
-          <Button
-            href="#contact"
-            sx={{ color: "#343a40", fontWeight: "bold", marginRight: "10px" }}
-          >
-            Contact
-          </Button>
+          <Link href="#contact" passHref>
+            <StyledButton>Contact</StyledButton>
+          </Link>
         </Box>
       </Toolbar>
     </AppBar>

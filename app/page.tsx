@@ -58,7 +58,7 @@ export default function HomePage() {
         variant="h4"
         component="h1"
         gutterBottom
-        sx={{ textAlign: "center", color: "#343a40" }}
+        sx={{ textAlign: "center", color: "#343a40", mt: -2 }}
       >
         Products
       </Typography>

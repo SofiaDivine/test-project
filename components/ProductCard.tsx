@@ -32,16 +32,17 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   return (
     <Card
       sx={{
-        maxWidth: 360,
-        margin: "auto",
+        maxWidth: 300,
+        margin: "16px",
         transition: "transform 0.3s ease-in-out",
         cursor: "pointer",
-        "&:hover": { transform: "scale(1.08)" },
-        backgroundColor: "#ffffff",
-        boxShadow: "0 6px 15px rgba(0, 0, 0, 0.1)",
-        borderRadius: "15px",
+        borderRadius: "20px",
         overflow: "hidden",
+        background: "linear-gradient(145deg, #f8ecec, #ffffff)",
+        boxShadow:
+          "4px 4px 10px rgba(0, 0, 0, 0.1), -4px -4px 10px rgba(255, 255, 255, 0.7)",
         position: "relative",
+        "&:hover": { transform: "scale(1.05)" },
       }}
       onClick={handleCardClick}
     >
@@ -49,22 +50,20 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
       {product.discountPercentage > 0 && (
         <Chip
           label={`-${product.discountPercentage}%`}
-          color="error"
           sx={{
             position: "absolute",
             top: "10px",
             right: "10px",
+            background: "#ff6f61",
+            color: "white",
             fontWeight: "bold",
-            borderRadius: "5px",
-            background: "rgba(255, 0, 0, 0.8)",
-            color: "#fff",
           }}
         />
       )}
 
       <CardMedia
         component="img"
-        height="240"
+        height="200"
         image={product.thumbnail || "/default-image.jpg"}
         alt={product.title}
         sx={{ objectFit: "cover" }}
@@ -73,14 +72,21 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
       <CardContent
         sx={{
           textAlign: "center",
-          backgroundColor: "#f9fafc",
+          backgroundColor: "#ffffff",
           padding: "16px",
+          borderRadius: "0 0 20px 20px",
         }}
       >
         <Typography
           variant="h6"
           component="h2"
-          sx={{ color: "#343a40", fontWeight: "bold" }}
+          sx={{
+            color: "#343a40",
+            fontWeight: "bold",
+            whiteSpace: "nowrap",
+            overflow: "hidden",
+            textOverflow: "ellipsis",
+          }}
         >
           {product.title}
         </Typography>
@@ -121,6 +127,24 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         <Typography variant="body2" sx={{ mt: 1 }}>
           ⭐ Rating: {product.rating.toFixed(1)}
         </Typography>
+
+        <Box
+          sx={{
+            mt: 2,
+            backgroundColor: "#fce4ec",
+            padding: "8px",
+            borderRadius: "12px",
+            boxShadow:
+              "inset 2px 2px 5px rgba(0, 0, 0, 0.1), inset -2px -2px 5px rgba(255, 255, 255, 0.7)",
+          }}
+        >
+          <Typography
+            variant="caption"
+            sx={{ color: "#9c27b0", fontWeight: "bold" }}
+          >
+            View the product
+          </Typography>
+        </Box>
       </CardContent>
     </Card>
   );

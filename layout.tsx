@@ -11,7 +11,14 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       <Header />
       <Box
         component="main"
-        sx={{ p: 4, backgroundColor: "#f0f4f8", minHeight: "100vh" }}
+        sx={{
+          p: 6,
+          backgroundColor: "#faf3f3",
+          minHeight: "100vh",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
       >
         {children}
       </Box>
