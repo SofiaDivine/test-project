@@ -177,7 +177,7 @@ const ProductCardInfo: React.FC<ProductCardInfoProps> = ({ product }) => {
                   label={tag}
                   sx={{
                     backgroundColor: "#ffe6e6",
-                    color: "#e57373",
+                    color: "#ff69b4",
                     fontWeight: "bold",
                     borderRadius: "12px",
                   }}
@@ -195,7 +195,7 @@ const ProductCardInfo: React.FC<ProductCardInfoProps> = ({ product }) => {
             gutterBottom
             sx={{
               textAlign: "center",
-              color: "#5b5b5b",
+              color: "#ff69b4",
               fontWeight: "bold",
               textDecoration: "underline",
               marginBottom: 4,
@@ -234,14 +234,6 @@ const ProductCardInfo: React.FC<ProductCardInfoProps> = ({ product }) => {
 
         {/* Additional Details */}
         <Box sx={{ mt: 4 }}>
-          <Typography
-            variant="h5"
-            component="h2"
-            gutterBottom
-            sx={{ textAlign: "center", fontWeight: "bold", color: "#757575" }}
-          >
-            Additional Details
-          </Typography>
           <Grid container spacing={4}>
             <Grid item xs={12} md={6}>
               <Card
@@ -251,7 +243,10 @@ const ProductCardInfo: React.FC<ProductCardInfoProps> = ({ product }) => {
                   borderRadius: "15px",
                 }}
               >
-                <Typography variant="h6" sx={{ mb: 2, fontWeight: "bold" }}>
+                <Typography
+                  variant="h6"
+                  sx={{ mb: 2, fontWeight: "bold", color: "#ff69b4" }}
+                >
                   Product Details
                 </Typography>
                 <Typography variant="body1" sx={{ mb: 1, color: "#757575" }}>
@@ -287,7 +282,12 @@ const ProductCardInfo: React.FC<ProductCardInfoProps> = ({ product }) => {
         <Box sx={{ mt: 5 }}>
           <Typography
             variant="h5"
-            sx={{ mb: 3, fontWeight: "bold", textAlign: "center" }}
+            sx={{
+              mb: 3,
+              fontWeight: "bold",
+              textAlign: "center",
+              color: "#ff69b4",
+            }}
           >
             Customer Reviews
           </Typography>
@@ -300,7 +300,7 @@ const ProductCardInfo: React.FC<ProductCardInfoProps> = ({ product }) => {
                   padding: 3,
                   boxShadow: "0 10px 20px rgba(0,0,0,0.05)",
                   borderRadius: "10px",
-                  backgroundColor: "#fef6e4",
+                  backgroundColor: "#ffffff",
                 }}
               >
                 <Typography variant="body1" sx={{ fontWeight: "bold" }}>

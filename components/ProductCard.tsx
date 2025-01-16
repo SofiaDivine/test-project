@@ -140,7 +140,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         >
           <Typography
             variant="caption"
-            sx={{ color: "#9c27b0", fontWeight: "bold" }}
+            sx={{ color: "#ff69b4", fontWeight: "bold" }}
           >
             View the product
           </Typography>
